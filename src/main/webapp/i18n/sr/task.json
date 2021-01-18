@@ -1,0 +1,24 @@
+{
+  "xerusApp": {
+    "task": {
+      "home": {
+        "title": "Tasks",
+        "createLabel": "Kreiraj novi Task",
+        "createOrEditLabel": "Kreirajte ili izmenite Task",
+        "notFound": "No Tasks found"
+      },
+      "created": "Kreiran je novi Task pod nazivom {{ param }}",
+      "updated": "Task pod nazivom {{ param }} je ažuriran",
+      "deleted": "Task pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Task pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Task"
+      },
+      "title": "Title",
+      "description": "Description",
+      "job": "Job"
+    }
+  }
+}

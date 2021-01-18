@@ -1,0 +1,27 @@
+{
+  "xerusApp": {
+    "jobHistory": {
+      "home": {
+        "title": "Job Histories",
+        "createLabel": "Kreiraj novi Job History",
+        "createOrEditLabel": "Kreirajte ili izmenite Job History",
+        "notFound": "No Job Histories found"
+      },
+      "created": "Kreiran je novi Job History pod nazivom {{ param }}",
+      "updated": "Job History pod nazivom {{ param }} je ažuriran",
+      "deleted": "Job History pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Job History pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Job History"
+      },
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "language": "Language",
+      "job": "Job",
+      "department": "Department",
+      "employee": "Employee"
+    }
+  }
+}

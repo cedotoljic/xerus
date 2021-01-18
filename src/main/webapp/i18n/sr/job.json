@@ -1,0 +1,26 @@
+{
+  "xerusApp": {
+    "job": {
+      "home": {
+        "title": "Jobs",
+        "createLabel": "Kreiraj novi Job",
+        "createOrEditLabel": "Kreirajte ili izmenite Job",
+        "notFound": "No Jobs found"
+      },
+      "created": "Kreiran je novi Job pod nazivom {{ param }}",
+      "updated": "Job pod nazivom {{ param }} je ažuriran",
+      "deleted": "Job pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Job pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Job"
+      },
+      "jobTitle": "Job Title",
+      "minSalary": "Min Salary",
+      "maxSalary": "Max Salary",
+      "task": "Task",
+      "employee": "Employee"
+    }
+  }
+}

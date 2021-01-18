@@ -1,0 +1,34 @@
+{
+  "xerusApp": {
+    "employee": {
+      "home": {
+        "title": "Employees",
+        "createLabel": "Kreiraj novi Employee",
+        "createOrEditLabel": "Kreirajte ili izmenite Employee",
+        "notFound": "No Employees found"
+      },
+      "created": "Kreiran je novi Employee pod nazivom {{ param }}",
+      "updated": "Employee pod nazivom {{ param }} je ažuriran",
+      "deleted": "Employee pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Employee pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Employee"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "hireDate": "Hire Date",
+      "salary": "Salary",
+      "commissionPct": "Commission Pct",
+      "job": "Job",
+      "manager": "Manager",
+      "department": "Department",
+      "help": {
+        "firstName": "The firstname attribute."
+      }
+    }
+  }
+}
