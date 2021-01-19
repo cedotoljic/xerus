@@ -1,0 +1,50 @@
+entity Document {
+	name String,
+    extention String,
+    type String,
+    docContentType String,
+	size Long,
+    doc AnyBlob,
+    status Status,
+    isFolder Boolen,
+    owner String,
+    responsible String,
+	}
+
+entity DocumentHistory {
+	name String,
+    extention String,
+    type String,
+    docContentType String,
+	size Long,
+    doc AnyBlob,
+    status Status,
+    isFolder Boolen,
+    owner String,
+    responsible String,
+	
+}
+
+enum Status {
+    NEW, IN_PROGRESS, IN_RELEASE, RELEASED, INVALID
+}
+
+
+// defining multiple oneToOne relationships
+relationship ManyToOne {
+	DocumentHistory{document} to Document,
+	
+}
+
+// Set pagination options
+paginate DocumentHistory with infinite-scroll
+paginate Document with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
