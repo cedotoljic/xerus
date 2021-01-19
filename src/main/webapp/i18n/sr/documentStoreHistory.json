@@ -1,0 +1,31 @@
+{
+  "xerusApp": {
+    "documentStoreHistory": {
+      "home": {
+        "title": "Document Store Histories",
+        "createLabel": "Kreiraj novi Document Store History",
+        "createOrEditLabel": "Kreirajte ili izmenite Document Store History",
+        "notFound": "No Document Store Histories found"
+      },
+      "created": "Kreiran je novi Document Store History pod nazivom {{ param }}",
+      "updated": "Document Store History pod nazivom {{ param }} je ažuriran",
+      "deleted": "Document Store History pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Document Store History pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Store History"
+      },
+      "name": "Name",
+      "extension": "Extension",
+      "contentType": "Content Type",
+      "size": "Size",
+      "doc": "Doc",
+      "status": "Status",
+      "isFolder": "Is Folder",
+      "owner": "Owner",
+      "responsible": "Responsible",
+      "document": "Document"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="documentStoreHistory">
+            <h2><span jhiTranslate="xerusApp.documentStoreHistory.detail.title">Document Store History</span> {{ documentStoreHistory.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.name">Name</span></dt>
+                <dd>
+                    <span>{{ documentStoreHistory.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.extension">Extension</span></dt>
+                <dd>
+                    <span>{{ documentStoreHistory.extension }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.contentType">Content Type</span></dt>
+                <dd>
+                    <span>{{ documentStoreHistory.contentType }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.size">Size</span></dt>
+                <dd>
+                    <span>{{ documentStoreHistory.size }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.doc">Doc</span></dt>
+                <dd>
+                    <div *ngIf="documentStoreHistory.doc">
+                        <a (click)="openFile(documentStoreHistory.docContentType, documentStoreHistory.doc)" jhiTranslate="entity.action.open">open</a>
+                        {{ documentStoreHistory.docContentType }}, {{ byteSize(documentStoreHistory.doc) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'xerusApp.DocumentStatus.' + documentStoreHistory.status }}">{{ documentStoreHistory.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.isFolder">Is Folder</span></dt>
+                <dd>
+                    <span>{{ documentStoreHistory.isFolder }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.owner">Owner</span></dt>
+                <dd>
+                    <span>{{ documentStoreHistory.owner }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.responsible">Responsible</span></dt>
+                <dd>
+                    <span>{{ documentStoreHistory.responsible }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreHistory.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="documentStoreHistory.document">
+                        <a [routerLink]="['/document-store', documentStoreHistory.document?.id, 'view']">{{ documentStoreHistory.document?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/document-store-history', documentStoreHistory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
