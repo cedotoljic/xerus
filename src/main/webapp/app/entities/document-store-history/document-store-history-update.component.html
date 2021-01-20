@@ -1,0 +1,118 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-document-store-history-heading" jhiTranslate="xerusApp.documentStoreHistory.home.createOrEditLabel">Create or edit a Document Store History</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.extension" for="field_extension">Extension</label>
+                    <input type="text" class="form-control" name="extension" id="field_extension"
+                           formControlName="extension"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.contentType" for="field_contentType">Content Type</label>
+                    <input type="text" class="form-control" name="contentType" id="field_contentType"
+                           formControlName="contentType"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.size" for="field_size">Size</label>
+                    <input type="number" class="form-control" name="size" id="field_size"
+                           formControlName="size"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.doc" for="field_doc">Doc</label>
+                    <div>
+                        <div *ngIf="editForm.get('doc')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('docContentType')!.value, editForm.get('doc')!.value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{ editForm.get('docContentType')!.value }}, {{ byteSize(editForm.get('doc')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({doc: null});editForm.patchValue({docContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_doc" (change)="setFileData($event, 'doc', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="doc" id="field_doc"
+                           formControlName="doc"/>
+                    <input type="hidden" class="form-control" name="docContentType" id="field_docContentType"
+                           formControlName="docContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="NEW">{{ 'xerusApp.DocumentStatus.NEW' | translate }}</option>
+                        <option value="IN_PROGRESS">{{ 'xerusApp.DocumentStatus.IN_PROGRESS' | translate }}</option>
+                        <option value="IN_RELEASE_PROCESS">{{ 'xerusApp.DocumentStatus.IN_RELEASE_PROCESS' | translate }}</option>
+                        <option value="RELEASED">{{ 'xerusApp.DocumentStatus.RELEASED' | translate }}</option>
+                        <option value="INVALID">{{ 'xerusApp.DocumentStatus.INVALID' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.isFolder" for="field_isFolder">Is Folder</label>
+                    <input type="checkbox" class="form-control" name="isFolder" id="field_isFolder"
+                           formControlName="isFolder"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.versionControlled" for="field_versionControlled">Version Controlled</label>
+                    <input type="checkbox" class="form-control" name="versionControlled" id="field_versionControlled"
+                           formControlName="versionControlled"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.version" for="field_version">Version</label>
+                    <input type="number" class="form-control" name="version" id="field_version"
+                           formControlName="version"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.owner" for="field_owner">Owner</label>
+                    <input type="text" class="form-control" name="owner" id="field_owner"
+                           formControlName="owner"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.responsible" for="field_responsible">Responsible</label>
+                    <input type="text" class="form-control" name="responsible" id="field_responsible"
+                           formControlName="responsible"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStoreHistory.document" for="field_document">Document</label>
+                    <select class="form-control" id="field_document" name="document" formControlName="document">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="documentStoreVersionOption.id === editForm.get('document')!.value?.id ? editForm.get('document')!.value : documentStoreVersionOption" *ngFor="let documentStoreVersionOption of documentstoreversions; trackBy: trackById">{{ documentStoreVersionOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
