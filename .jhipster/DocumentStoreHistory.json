@@ -1,0 +1,71 @@
+{
+  "name": "DocumentStoreHistory",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "extension",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contentType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "size",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "doc",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "DocumentStatus",
+      "fieldValues": "NEW,IN_PROGRESS,IN_RELEASE_PROCESS,RELEASED,INVALID"
+    },
+    {
+      "fieldName": "isFolder",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "versionControlled",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "owner",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "responsible",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "documentStoreVersion",
+      "otherEntityRelationshipName": "documentStoreHistory",
+      "relationshipName": "document",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210120095918",
+  "entityTableName": "document_store_history",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,33 @@
+{
+  "xerusApp": {
+    "documentStore": {
+      "home": {
+        "title": "Document Stores",
+        "createLabel": "Create a new Document Store",
+        "createOrEditLabel": "Create or edit a Document Store",
+        "notFound": "No Document Stores found"
+      },
+      "created": "A new Document Store is created with identifier {{ param }}",
+      "updated": "A Document Store is updated with identifier {{ param }}",
+      "deleted": "A Document Store is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Document Store {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Store"
+      },
+      "name": "Name",
+      "extension": "Extension",
+      "contentType": "Content Type",
+      "size": "Size",
+      "doc": "Doc",
+      "status": "Status",
+      "isFolder": "Is Folder",
+      "versionControlled": "Version Controlled",
+      "version": "Version",
+      "owner": "Owner",
+      "responsible": "Responsible",
+      "parent": "Parent"
+    }
+  }
+}
