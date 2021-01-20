@@ -1,0 +1,34 @@
+{
+  "xerusApp": {
+    "documentStore": {
+      "home": {
+        "title": "Document Stores",
+        "createLabel": "Kreiraj novi Document Store",
+        "createOrEditLabel": "Kreirajte ili izmenite Document Store",
+        "notFound": "No Document Stores found"
+      },
+      "created": "Kreiran je novi Document Store pod nazivom {{ param }}",
+      "updated": "Document Store pod nazivom {{ param }} je ažuriran",
+      "deleted": "Document Store pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Document Store pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Store"
+      },
+      "name": "Name",
+      "extension": "Extension",
+      "contentType": "Content Type",
+      "size": "Size",
+      "doc": "Doc",
+      "thumbnail": "Thumbnail",
+      "status": "Status",
+      "isFolder": "Is Folder",
+      "versionControlled": "Version Controlled",
+      "version": "Version",
+      "owner": "Owner",
+      "responsible": "Responsible",
+      "parent": "Parent"
+    }
+  }
+}
