@@ -1,0 +1,95 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="xerusApp.documentStoreHistory.home.title">Document Store Histories</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-document-store-history" [routerLink]="['/document-store-history/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="xerusApp.documentStoreHistory.home.createLabel">
+            Create a new Document Store History
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="documentStoreHistories?.length === 0">
+        <span jhiTranslate="xerusApp.documentStoreHistory.home.notFound">No documentStoreHistories found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="documentStoreHistories && documentStoreHistories.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="xerusApp.documentStoreHistory.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="extension"><span jhiTranslate="xerusApp.documentStoreHistory.extension">Extension</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="contentType"><span jhiTranslate="xerusApp.documentStoreHistory.contentType">Content Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="size"><span jhiTranslate="xerusApp.documentStoreHistory.size">Size</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="doc"><span jhiTranslate="xerusApp.documentStoreHistory.doc">Doc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="thumbnail"><span jhiTranslate="xerusApp.documentStoreHistory.thumbnail">Thumbnail</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="xerusApp.documentStoreHistory.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isFolder"><span jhiTranslate="xerusApp.documentStoreHistory.isFolder">Is Folder</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="versionControlled"><span jhiTranslate="xerusApp.documentStoreHistory.versionControlled">Version Controlled</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="version"><span jhiTranslate="xerusApp.documentStoreHistory.version">Version</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="owner"><span jhiTranslate="xerusApp.documentStoreHistory.owner">Owner</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="responsible"><span jhiTranslate="xerusApp.documentStoreHistory.responsible">Responsible</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="document.id"><span jhiTranslate="xerusApp.documentStoreHistory.document">Document</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let documentStoreHistory of documentStoreHistories ;trackBy: trackId">
+                    <td><a [routerLink]="['/document-store-history', documentStoreHistory.id, 'view']">{{ documentStoreHistory.id }}</a></td>
+                    <td>{{ documentStoreHistory.name }}</td>
+                    <td>{{ documentStoreHistory.extension }}</td>
+                    <td>{{ documentStoreHistory.contentType }}</td>
+                    <td>{{ documentStoreHistory.size }}</td>
+                    <td>
+                        <a *ngIf="documentStoreHistory.doc" (click)="openFile(documentStoreHistory.docContentType, documentStoreHistory.doc)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="documentStoreHistory.doc">{{ documentStoreHistory.docContentType }}, {{ byteSize(documentStoreHistory.doc) }}</span>
+                    </td>
+                    <td>
+                        <a *ngIf="documentStoreHistory.thumbnail" (click)="openFile(documentStoreHistory.thumbnailContentType, documentStoreHistory.thumbnail)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="documentStoreHistory.thumbnail">{{ documentStoreHistory.thumbnailContentType }}, {{ byteSize(documentStoreHistory.thumbnail) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'xerusApp.DocumentStatus.' + documentStoreHistory.status }}">{{ documentStoreHistory.status }}</td>
+                    <td>{{ documentStoreHistory.isFolder }}</td>
+                    <td>{{ documentStoreHistory.versionControlled }}</td>
+                    <td>{{ documentStoreHistory.version }}</td>
+                    <td>{{ documentStoreHistory.owner }}</td>
+                    <td>{{ documentStoreHistory.responsible }}</td>
+                    <td>
+                        <div *ngIf="documentStoreHistory.document">
+                            <a [routerLink]="['/document-store-version', documentStoreHistory.document?.id, 'view']" >{{ documentStoreHistory.document?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/document-store-history', documentStoreHistory.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/document-store-history', documentStoreHistory.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(documentStoreHistory)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

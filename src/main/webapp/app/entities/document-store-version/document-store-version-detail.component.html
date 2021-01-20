@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="documentStoreVersion">
+            <h2><span jhiTranslate="xerusApp.documentStoreVersion.detail.title">Document Store Version</span> {{ documentStoreVersion.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.name">Name</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.extension">Extension</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.extension }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.contentType">Content Type</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.contentType }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.size">Size</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.size }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.doc">Doc</span></dt>
+                <dd>
+                    <div *ngIf="documentStoreVersion.doc">
+                        <a (click)="openFile(documentStoreVersion.docContentType, documentStoreVersion.doc)" jhiTranslate="entity.action.open">open</a>
+                        {{ documentStoreVersion.docContentType }}, {{ byteSize(documentStoreVersion.doc) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.thumbnail">Thumbnail</span></dt>
+                <dd>
+                    <div *ngIf="documentStoreVersion.thumbnail">
+                        <a (click)="openFile(documentStoreVersion.thumbnailContentType, documentStoreVersion.thumbnail)" jhiTranslate="entity.action.open">open</a>
+                        {{ documentStoreVersion.thumbnailContentType }}, {{ byteSize(documentStoreVersion.thumbnail) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'xerusApp.DocumentStatus.' + documentStoreVersion.status }}">{{ documentStoreVersion.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.isFolder">Is Folder</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.isFolder }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.versionControlled">Version Controlled</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.versionControlled }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.version">Version</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.version }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.owner">Owner</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.owner }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.responsible">Responsible</span></dt>
+                <dd>
+                    <span>{{ documentStoreVersion.responsible }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStoreVersion.document">Document</span></dt>
+                <dd>
+                    <div *ngIf="documentStoreVersion.document">
+                        <a [routerLink]="['/document-store', documentStoreVersion.document?.id, 'view']">{{ documentStoreVersion.document?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/document-store-version', documentStoreVersion.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+{
+  "xerusApp": {
+    "documentStoreVersion": {
+      "home": {
+        "title": "Document Store Versions",
+        "createLabel": "Kreiraj novi Document Store Version",
+        "createOrEditLabel": "Kreirajte ili izmenite Document Store Version",
+        "notFound": "No Document Store Versions found"
+      },
+      "created": "Kreiran je novi Document Store Version pod nazivom {{ param }}",
+      "updated": "Document Store Version pod nazivom {{ param }} je ažuriran",
+      "deleted": "Document Store Version pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Document Store Version pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Store Version"
+      },
+      "name": "Name",
+      "extension": "Extension",
+      "contentType": "Content Type",
+      "size": "Size",
+      "doc": "Doc",
+      "thumbnail": "Thumbnail",
+      "status": "Status",
+      "isFolder": "Is Folder",
+      "versionControlled": "Version Controlled",
+      "version": "Version",
+      "owner": "Owner",
+      "responsible": "Responsible",
+      "document": "Document"
+    }
+  }
+}
