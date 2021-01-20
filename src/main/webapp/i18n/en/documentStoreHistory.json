@@ -1,0 +1,33 @@
+{
+  "xerusApp": {
+    "documentStoreHistory": {
+      "home": {
+        "title": "Document Store Histories",
+        "createLabel": "Create a new Document Store History",
+        "createOrEditLabel": "Create or edit a Document Store History",
+        "notFound": "No Document Store Histories found"
+      },
+      "created": "A new Document Store History is created with identifier {{ param }}",
+      "updated": "A Document Store History is updated with identifier {{ param }}",
+      "deleted": "A Document Store History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Document Store History {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Store History"
+      },
+      "name": "Name",
+      "extension": "Extension",
+      "size": "Size",
+      "doc": "Doc",
+      "thumbnail": "Thumbnail",
+      "status": "Status",
+      "isFolder": "Is Folder",
+      "versionControlled": "Version Controlled",
+      "version": "Version",
+      "owner": "Owner",
+      "responsible": "Responsible",
+      "document": "Document"
+    }
+  }
+}
