@@ -1,0 +1,95 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="xerusApp.documentStore.home.title">Document Stores</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-document-store" [routerLink]="['/document-store/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="xerusApp.documentStore.home.createLabel">
+            Create a new Document Store
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="documentStores?.length === 0">
+        <span jhiTranslate="xerusApp.documentStore.home.notFound">No documentStores found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="documentStores && documentStores.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="xerusApp.documentStore.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="extension"><span jhiTranslate="xerusApp.documentStore.extension">Extension</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="size"><span jhiTranslate="xerusApp.documentStore.size">Size</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="doc"><span jhiTranslate="xerusApp.documentStore.doc">Doc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="thumbnail"><span jhiTranslate="xerusApp.documentStore.thumbnail">Thumbnail</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span jhiTranslate="xerusApp.documentStore.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isFolder"><span jhiTranslate="xerusApp.documentStore.isFolder">Is Folder</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="versionControlled"><span jhiTranslate="xerusApp.documentStore.versionControlled">Version Controlled</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="version"><span jhiTranslate="xerusApp.documentStore.version">Version</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="owner"><span jhiTranslate="xerusApp.documentStore.owner">Owner</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="responsible"><span jhiTranslate="xerusApp.documentStore.responsible">Responsible</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="parentId"><span jhiTranslate="xerusApp.documentStore.parent">Parent</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let documentStore of documentStores ;trackBy: trackId">
+                    <td><a [routerLink]="['/document-store', documentStore.id, 'view']">{{ documentStore.id }}</a></td>
+                    <td>{{ documentStore.name }}</td>
+                    <td>{{ documentStore.extension }}</td>
+                    <td>{{ documentStore.size }}</td>
+                    <td>
+                        <a *ngIf="documentStore.doc" (click)="openFile(documentStore.docContentType, documentStore.doc)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="documentStore.doc">{{ documentStore.docContentType }}, {{ byteSize(documentStore.doc) }}</span>
+                    </td>
+                    <td>
+                        <a *ngIf="documentStore.thumbnail" (click)="openFile(documentStore.thumbnailContentType, documentStore.thumbnail)">
+                            <img [src]="'data:' + documentStore.thumbnailContentType + ';base64,' + documentStore.thumbnail" style="max-height: 30px;" alt="documentStore image"/>
+                        </a>
+                        <span *ngIf="documentStore.thumbnail">{{ documentStore.thumbnailContentType }}, {{ byteSize(documentStore.thumbnail) }}</span>
+                    </td>
+                    <td jhiTranslate="{{ 'xerusApp.DocumentStatus.' + documentStore.status }}">{{ documentStore.status }}</td>
+                    <td>{{ documentStore.isFolder }}</td>
+                    <td>{{ documentStore.versionControlled }}</td>
+                    <td>{{ documentStore.version }}</td>
+                    <td>{{ documentStore.owner }}</td>
+                    <td>{{ documentStore.responsible }}</td>
+                    <td>
+                        <div *ngIf="documentStore.parentId">
+                            <a [routerLink]="['/document-store', documentStore.parentId , 'view']" >{{ documentStore.parentId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/document-store', documentStore.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/document-store', documentStore.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(documentStore)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
