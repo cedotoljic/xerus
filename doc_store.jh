@@ -1,0 +1,74 @@
+entity DocumentStore {
+	name String,
+    extension String,
+    size Long,
+    doc AnyBlob,
+    thumbnail ImageBlob,
+    status DocumentStatus,
+    isFolder Boolean,
+    versionControlled Boolean,
+    version Long,
+    owner String,
+    responsible String,
+	}
+
+entity DocumentStoreHistory {
+	name String,
+    extension String,
+   	size Long,
+    doc AnyBlob,
+    thumbnail ImageBlob,
+    status DocumentStatus,
+    isFolder Boolean,
+    versionControlled Boolean,
+    version Long,
+    owner String,
+    responsible String,
+	
+}
+
+entity DocumentStoreVersion {
+	name String,
+    extension String,
+   	size Long,
+    doc AnyBlob,
+    thumbnail AnyBlob,
+    status DocumentStatus,
+    isFolder Boolean,
+    versionControlled Boolean,
+    version Long,
+    owner String,
+    responsible String,
+	}
+
+enum DocumentStatus {
+    NEW, IN_PROGRESS, IN_RELEASE_PROCESS, RELEASED, INVALID
+}
+
+
+// defining multiple oneToOne relationships
+relationship ManyToOne {
+	DocumentStoreHistory{document} to DocumentStoreVersion,
+}
+relationship ManyToOne {
+	DocumentStoreVersion{document} to DocumentStore,
+}
+relationship ManyToOne {
+	DocumentStore{parent} to DocumentStore
+}
+
+// Set pagination options
+paginate DocumentStoreHistory with infinite-scroll
+paginate DocumentStore with infinite-scroll
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceClass // or serviceImpl
+filter DocumentStore
+ 
+
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
