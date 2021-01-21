@@ -50,6 +50,9 @@ public class CacheConfiguration {
             createCache(cm, com.synsoft.xerus.domain.User.class.getName());
             createCache(cm, com.synsoft.xerus.domain.Authority.class.getName());
             createCache(cm, com.synsoft.xerus.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.synsoft.xerus.domain.DocumentStore.class.getName());
+            createCache(cm, com.synsoft.xerus.domain.DocumentStoreHistory.class.getName());
+            createCache(cm, com.synsoft.xerus.domain.DocumentStoreVersion.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
