@@ -1,0 +1,33 @@
+{
+  "xerusApp": {
+    "documentStoreVersion": {
+      "home": {
+        "title": "Document Store Versions",
+        "createLabel": "Create a new Document Store Version",
+        "createOrEditLabel": "Create or edit a Document Store Version",
+        "notFound": "No Document Store Versions found"
+      },
+      "created": "A new Document Store Version is created with identifier {{ param }}",
+      "updated": "A Document Store Version is updated with identifier {{ param }}",
+      "deleted": "A Document Store Version is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Document Store Version {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Store Version"
+      },
+      "name": "Name",
+      "extension": "Extension",
+      "size": "Size",
+      "doc": "Doc",
+      "thumbnail": "Thumbnail",
+      "status": "Status",
+      "isFolder": "Is Folder",
+      "versionControlled": "Version Controlled",
+      "version": "Version",
+      "owner": "Owner",
+      "responsible": "Responsible",
+      "document": "Document"
+    }
+  }
+}
