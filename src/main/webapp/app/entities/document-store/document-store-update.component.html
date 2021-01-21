@@ -1,0 +1,130 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-document-store-heading" jhiTranslate="xerusApp.documentStore.home.createOrEditLabel">Create or edit a Document Store</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.extension" for="field_extension">Extension</label>
+                    <input type="text" class="form-control" name="extension" id="field_extension"
+                           formControlName="extension"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.size" for="field_size">Size</label>
+                    <input type="number" class="form-control" name="size" id="field_size"
+                           formControlName="size"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.doc" for="field_doc">Doc</label>
+                    <div>
+                        <div *ngIf="editForm.get('doc')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('docContentType')!.value, editForm.get('doc')!.value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{ editForm.get('docContentType')!.value }}, {{ byteSize(editForm.get('doc')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({doc: null});editForm.patchValue({docContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_doc" (change)="setFileData($event, 'doc', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="doc" id="field_doc"
+                           formControlName="doc"/>
+                    <input type="hidden" class="form-control" name="docContentType" id="field_docContentType"
+                           formControlName="docContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.thumbnail" for="field_thumbnail">Thumbnail</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('thumbnailContentType')!.value + ';base64,' + editForm.get('thumbnail')!.value" style="max-height: 100px;" *ngIf="editForm.get('thumbnail')!.value" alt="documentStore image"/>
+                        <div *ngIf="editForm.get('thumbnail')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('thumbnailContentType')!.value }}, {{ byteSize(editForm.get('thumbnail')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('thumbnail', 'thumbnailContentType', 'file_thumbnail')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_thumbnail" (change)="setFileData($event, 'thumbnail', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="thumbnail" id="field_thumbnail"
+                           formControlName="thumbnail"/>
+                    <input type="hidden" class="form-control" name="thumbnailContentType" id="field_thumbnailContentType"
+                           formControlName="thumbnailContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="NEW">{{ 'xerusApp.DocumentStatus.NEW' | translate }}</option>
+                        <option value="IN_PROGRESS">{{ 'xerusApp.DocumentStatus.IN_PROGRESS' | translate }}</option>
+                        <option value="IN_RELEASE_PROCESS">{{ 'xerusApp.DocumentStatus.IN_RELEASE_PROCESS' | translate }}</option>
+                        <option value="RELEASED">{{ 'xerusApp.DocumentStatus.RELEASED' | translate }}</option>
+                        <option value="INVALID">{{ 'xerusApp.DocumentStatus.INVALID' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.isFolder" for="field_isFolder">Is Folder</label>
+                    <input type="checkbox" class="form-control" name="isFolder" id="field_isFolder"
+                           formControlName="isFolder"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.versionControlled" for="field_versionControlled">Version Controlled</label>
+                    <input type="checkbox" class="form-control" name="versionControlled" id="field_versionControlled"
+                           formControlName="versionControlled"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.version" for="field_version">Version</label>
+                    <input type="number" class="form-control" name="version" id="field_version"
+                           formControlName="version"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.owner" for="field_owner">Owner</label>
+                    <input type="text" class="form-control" name="owner" id="field_owner"
+                           formControlName="owner"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.responsible" for="field_responsible">Responsible</label>
+                    <input type="text" class="form-control" name="responsible" id="field_responsible"
+                           formControlName="responsible"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="xerusApp.documentStore.parent" for="field_parent">Parent</label>
+                    <select class="form-control" id="field_parent" name="parent" formControlName="parent">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="documentStoreOption.id === editForm.get('parent')!.value?.id ? editForm.get('parent')!.value : documentStoreOption" *ngFor="let documentStoreOption of documentstores; trackBy: trackById">{{ documentStoreOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
