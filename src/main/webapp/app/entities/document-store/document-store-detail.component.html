@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="documentStore">
+            <h2><span jhiTranslate="xerusApp.documentStore.detail.title">Document Store</span> {{ documentStore.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="xerusApp.documentStore.name">Name</span></dt>
+                <dd>
+                    <span>{{ documentStore.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.extension">Extension</span></dt>
+                <dd>
+                    <span>{{ documentStore.extension }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.size">Size</span></dt>
+                <dd>
+                    <span>{{ documentStore.size }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.doc">Doc</span></dt>
+                <dd>
+                    <div *ngIf="documentStore.doc">
+                        <a (click)="openFile(documentStore.docContentType, documentStore.doc)" jhiTranslate="entity.action.open">open</a>
+                        {{ documentStore.docContentType }}, {{ byteSize(documentStore.doc) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.thumbnail">Thumbnail</span></dt>
+                <dd>
+                    <div *ngIf="documentStore.thumbnail">
+                        <a (click)="openFile(documentStore.thumbnailContentType, documentStore.thumbnail)">
+                            <img [src]="'data:' + documentStore.thumbnailContentType + ';base64,' + documentStore.thumbnail" style="max-width: 100%;" alt="documentStore image"/>
+                        </a>
+                        {{ documentStore.thumbnailContentType }}, {{ byteSize(documentStore.thumbnail) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'xerusApp.DocumentStatus.' + documentStore.status }}">{{ documentStore.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.isFolder">Is Folder</span></dt>
+                <dd>
+                    <span>{{ documentStore.isFolder }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.versionControlled">Version Controlled</span></dt>
+                <dd>
+                    <span>{{ documentStore.versionControlled }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.version">Version</span></dt>
+                <dd>
+                    <span>{{ documentStore.version }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.owner">Owner</span></dt>
+                <dd>
+                    <span>{{ documentStore.owner }}</span>
+                </dd>
+                <dt><span jhiTranslate="xerusApp.documentStore.responsible">Responsible</span></dt>
+                <dd>
+                    <span>{{ documentStore.responsible }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/document-store', documentStore.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
